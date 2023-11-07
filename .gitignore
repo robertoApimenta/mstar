@@ -1,0 +1,68 @@
+# Ignorar diretórios de compilação
+bin/
+obj/
+
+# Ignorar arquivos de compilação
+*.dll
+*.exe
+*.pdb
+*.user
+*.ncrunch*
+*.suo
+*.cache
+*.log
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.sdf
+*.tlb
+*.tlh
+*.bak
+*.[Cc]ache
+*.ilk
+*.cl
+
+# Ignorar diretórios e arquivos de dependências
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+bower_components/
+node_modules/
+paket-files/
+paket-files/
+
+# Ignorar arquivos de configuração local
+*.user
+*.suo
+*.sln.docstates
+
+# Ignorar diretórios de cache e temporários
+[Cc]ache/
+[Tt]emp/
+[Oo]bj/
+[Ii]nt/
+
+# Ignorar arquivos de ambiente
+*.log
+*.bak
+*.swp
+*~.nupkg
+*.~suo
+*.~vspscc
+*~
+
+# Ignorar arquivos de logs
+log/
+logs/
+
+# Ignorar arquivos específicos do editor/IDE
+.vscode/
+.idea/
+*.sln.iml
+
+# Ignorar diretórios de uploads/downloads
+uploads/
+downloads/
