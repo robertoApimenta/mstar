@@ -27,6 +27,16 @@ const Entradas = () => {
         e.preventDefault();
         try {
 
+            const produto = await axios.get(`http://localhost:5198/api/products/${entrada.productId}`);
+
+            await axios.put(`http://localhost:5198/api/products/${entrada.productId}`, {
+                name: produto.data.name,
+                manufacturer: produto.data.manufacturer,
+                type: produto.data.type,
+                description: produto.data.description,
+                quantityinstock: (Number(produto.data.quantityInStock) + Number(entrada.quantity))
+            });
+
             await axios.post('http://localhost:5198/api/product-entry', entrada);
 
             setEntrada({
@@ -34,7 +44,6 @@ const Entradas = () => {
                 dateEntry: '',
                 quantity: 0,
             });
-
 
         } catch (error) {
             console.error('Erro ao adicionar entrada:', error);
