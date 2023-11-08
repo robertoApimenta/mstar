@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Container } from './styles';
+import { Container, Table } from './styles';
 
 const Produtos = () => {
 
@@ -51,7 +51,7 @@ const Produtos = () => {
         };
 
         fetchProdutos();
-    }, [produtos]);
+    }, []);
 
     return (
         <Container>
@@ -91,13 +91,14 @@ const Produtos = () => {
                 <button type="submit">Adicionar Produto</button>
             </form>
 
-            <table>
+            <Table>
                 <thead>
                     <tr>
                         <th>Nome</th>
                         <th>Fabricante</th>
                         <th>Tipo</th>
                         <th>Descrição</th>
+                        <th>Quantidade em estoque</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -107,10 +108,11 @@ const Produtos = () => {
                             <td>{produto.manufacturer}</td>
                             <td>{produto.type}</td>
                             <td>{produto.description}</td>
+                            <td>{produto.quantityInStock}</td>
                         </tr>
                     ))}
                 </tbody>
-            </table>
+            </Table>
         </Container>
     );
 };
