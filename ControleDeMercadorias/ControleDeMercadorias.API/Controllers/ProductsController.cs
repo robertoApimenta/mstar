@@ -42,6 +42,7 @@ namespace ControleDeMercadorias.API.Controllers
         public IActionResult Post(Product product)
         {
             _context.Products.Add(product);
+            _context.SaveChanges();
             return CreatedAtAction(nameof(GetById), new { id = product.Id}, product);
         }
 
@@ -57,6 +58,9 @@ namespace ControleDeMercadorias.API.Controllers
             }
 
             product.Update(productInput.Name, productInput.Manufacturer, productInput.Type, productInput.Description, productInput.QuantityInStock);
+            
+            _context.Products.Update(product);
+            _context.SaveChanges();
 
             return NoContent();
         }
@@ -73,6 +77,8 @@ namespace ControleDeMercadorias.API.Controllers
             }
 
             product.Delete();
+
+            _context.SaveChanges();
 
             return NoContent();
         }

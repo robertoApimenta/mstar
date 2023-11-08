@@ -2,6 +2,7 @@
 using ControleDeMercadorias.API.Persistence;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ControleDeMercadorias.API.Controllers
 {
@@ -20,14 +21,18 @@ namespace ControleDeMercadorias.API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var productsEntry = _context.ProductEntrys.ToList();
+            var productsEntry = _context.ProductEntrys
+                .ToList();
+
             return Ok(productsEntry);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
-            var productEntry = _context.ProductEntrys.SingleOrDefault(p => p.Id == id);
+            var productEntry = _context.ProductEntrys
+                .SingleOrDefault(p => p.Id == id);
+
             if(productEntry == null) 
             {
                 return NotFound();    
@@ -39,6 +44,7 @@ namespace ControleDeMercadorias.API.Controllers
         public IActionResult Post(ProductEntry productEntry)
         {
             _context.ProductEntrys.Add(productEntry);
+            _context.SaveChanges();
 
             return CreatedAtAction(nameof(GetById), new {id = productEntry.Id}, productEntry);
         }
