@@ -1,21 +1,44 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    border: 1px solid #000;
     width: 100%;
-    height: 100vh;
-    padding: 10px;
-    margin: 10px;
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+        margin-bottom: 20px;
+    }
+`;
+
+export const Form = styled.form`
+    display: flex;
+    flex-direction: row;
 `;
 
 export const Table = styled.table`
-    background: #fff;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
 
-    tr {
-        border: 1px solid black;
+    thead {
+        background-color: #504da1;
+        color: #fff;
     }
 
-    td {
-        border: 1px solid black;
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tbody tr:hover {
+        background-color: #ddd;
     }
 `;

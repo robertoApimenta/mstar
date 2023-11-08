@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Container, Table } from './styles';
+import { Container, Table, Form } from './styles';
+import Input from '../../components/Input';
+import Select from '../../components/Select';
+import Button from '../../components/Button';
+
 
 const Entradas = () => {
 
@@ -83,10 +87,10 @@ const Entradas = () => {
 
     return (
         <Container>
-            Entradas
+            <h4>CADASTRAR NOVA ENTRADA</h4>
 
-            <form onSubmit={handleSubmit}>
-                <select
+            <Form onSubmit={handleSubmit}>
+                <Select
                     name="productId"
                     value={entrada.productId}
                     onChange={handleInputChange}
@@ -98,15 +102,16 @@ const Entradas = () => {
                             {produto.name}
                         </option>
                     ))}
-                </select>
-                <input
+                </Select>
+
+                <Input
                     type="date"
                     name="dateEntry"
                     value={entrada.dateEntry}
                     onChange={handleInputChange}
                     required
                 />
-                <input
+                <Input
                     type="number"
                     name="quantity"
                     value={entrada.quantity}
@@ -114,9 +119,9 @@ const Entradas = () => {
                     min="0"
                     required
                 />
-                <button type="submit">Registrar Entrada</button>
-            </form>
-
+                <Button type="submit">Registrar Entrada</Button>
+            </Form>
+            <h4>ENTRADAS</h4>
             <Table>
                 <thead>
                     <tr>
