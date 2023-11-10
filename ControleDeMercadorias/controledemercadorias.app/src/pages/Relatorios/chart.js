@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -25,10 +25,6 @@ export const options = {
         legend: {
             position: 'top',
         },
-        title: {
-            display: true,
-            text: 'Chart.js Bar Chart',
-        },
     },
 };
 
@@ -40,7 +36,7 @@ function ColumnChart({ data }) {
         labels,
         datasets: [
             {
-                label: 'Dataset 1',
+                label: 'Quantidade',
                 data: quantities,
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             }
@@ -50,7 +46,6 @@ function ColumnChart({ data }) {
 
     return (
         <div>
-            <h2>Gráfico de Colunas</h2>
             <Bar options={options} data={chartData} />;
         </div>
     );

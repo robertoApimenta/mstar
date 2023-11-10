@@ -35,7 +35,7 @@ namespace ControleDeMercadorias.API.Persistence.Migrations
                         .HasColumnName("description");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("is_required");
 
                     b.Property<string>("Manufacturer")

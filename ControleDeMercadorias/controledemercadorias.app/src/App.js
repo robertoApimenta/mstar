@@ -19,7 +19,7 @@ function App() {
         <GlobalStyles />
         <Navbar />
         <Routes>
-          <Route path='/home' element={<Home />} />
+          <Route path='/' element={<Home />} />
           <Route path='/produtos' element={<Produtos />} />
           <Route path='/entradas' element={<Entradas />} />
           <Route path='/saidas' element={<Saidas />} />

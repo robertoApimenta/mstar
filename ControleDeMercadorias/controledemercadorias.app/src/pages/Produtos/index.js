@@ -9,7 +9,6 @@ import Button from '../../components/Button'
 const Produtos = () => {
 
     const [produtos, setProdutos] = useState([]);
-    const [productFieldsOK, setProductFieldsOK] = useState(true);
 
     const [novoProduto, setNovoProduto] = useState({
         name: '',
@@ -20,11 +19,6 @@ const Produtos = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'name' && value.length > 3) {
-            setProductFieldsOK(false)
-        } else {
-            setProductFieldsOK(true)
-        }
         setNovoProduto({
             ...novoProduto,
             [name]: value,
@@ -81,6 +75,7 @@ const Produtos = () => {
                     value={novoProduto.manufacturer}
                     onChange={handleInputChange}
                     placeholder="Fabricante"
+                    required
                 />
                 <Input
                     type="text"
@@ -88,6 +83,7 @@ const Produtos = () => {
                     value={novoProduto.type}
                     onChange={handleInputChange}
                     placeholder="Tipo"
+                    required
                 />
                 <Input
                     type="text"
@@ -95,8 +91,9 @@ const Produtos = () => {
                     value={novoProduto.description}
                     onChange={handleInputChange}
                     placeholder="Descrição"
+                    required
                 />
-                <Button type="submit" disabled={productFieldsOK}>Adicionar Produto</Button>
+                <Button type="submit">Adicionar Produto</Button>
             </Form>
 
             <h4>PRODUTOS</h4>

@@ -16,12 +16,13 @@ export const Container = styled.div`
 export const Form = styled.form`
     display: flex;
     flex-direction: row;
+    width: 400px;
 `;
 
 export const Table = styled.table`
-    width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    width: 400px;
 
     thead {
         background-color: #504da1;
@@ -41,4 +42,25 @@ export const Table = styled.table`
     tbody tr:hover {
         background-color: #ddd;
     }
+`;
+
+export const Relatorios = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+`;
+
+export const Entradas = styled.div`
+    display: flex;
+    border-top: 2px solid gray;
+`;
+
+export const Saidas = styled.div`
+    display: flex;
+    border-top: 2px solid gray;
+`;
+
+export const Chart = styled.div`
+    width: 500px;
+    margin-left: 100px;
 `;

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import ColumnChart from './chart';
 
 import axios from 'axios'
 
-import { Container, Form, Table } from './styles';
+import { Container, Form, Table, Relatorios, Entradas, Saidas, Chart } from './styles';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -126,10 +128,20 @@ const Home = () => {
 
     function formatDate(dateString) {
         const date = new Date(dateString);
-        const day = date.getDate().toString().padStart(2, '0');
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
+        return `${month}-${year}`;
+    };
+
+    const generatePDF = () => {
+        const content = document.getElementById('meuRelatorio');
+        const pdf = new jsPDF('p', 'pt', 'letter');
+
+        html2canvas(content).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            pdf.addImage(imgData, 'PNG', 40, 40, 500, 300);
+            pdf.save('relatorio.pdf');
+        });
     };
 
     return (
@@ -143,51 +155,70 @@ const Home = () => {
                     required
                 />
                 <Button type="submit">Filtrar dados</Button>
+                {mergedEntries.length < 1 ? '' :
+                    <Button
+                        type="button"
+                        onClick={generatePDF}
+                        contentId="meuRelatorio"
+                        style={{marginLeft: '10px', backgroundColor: 'red'}}
+                    >
+                        Gerar PDF
+                    </Button>
+                }
+                
             </Form>
 
-            <h4>ENTRADAS NO PERÍODO SELECIONADO</h4>
-
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {mergedEntries.map((entrada) => (
-                        <tr key={entrada.productId}>
-                            <td>{formatDate(entrada.dateEntry)}</td>
-                            <td>{entrada.productName}</td>
-                            <td>{entrada.quantity}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-            {mergedEntries.length < 1 ? 'não carregou dados' : <ColumnChart data={mergedEntries} />}
             
-
-            <h4>SAÍDAS NO PERÍODO SELECIONADO</h4>
-
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {mergedOutputs.map((output) => (
-                        <tr key={output.productId}>
-                            <td>{formatDate(output.dateOutput)}</td>
-                            <td>{output.productName}</td>
-                            <td>{output.quantity}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
+            {mergedEntries.length < 1 ? '' : 
+                <Relatorios id="meuRelatorio">
+                    <h4>ENTRADAS NO PERÍODO {formatDate(date)}</h4>
+                    <Entradas>
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {mergedEntries.map((entrada) => (
+                                    <tr key={entrada.productId}>
+                                        <td>{entrada.productName}</td>
+                                        <td>{entrada.quantity}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                        <Chart>
+                            <ColumnChart data={mergedEntries} />
+                        </Chart>
+                        
+                    </Entradas>
+                    <h4>SAÍDAS NO PERÍODO {formatDate(date)}</h4>
+                    <Saidas>
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {mergedOutputs.map((output) => (
+                                    <tr key={output.productId}>
+                                        <td>{output.productName}</td>
+                                        <td>{output.quantity}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                        <Chart>
+                            <ColumnChart data={mergedOutputs} />
+                        </Chart>
+                    </Saidas>
+                </Relatorios>
+            }
+            
         </Container>
     );
 };

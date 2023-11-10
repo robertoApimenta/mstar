@@ -115,7 +115,7 @@ const Entradas = () => {
                 <Input
                     type="date"
                     name="dateEntry"
-                    value={formatDate(entrada.dateEntry)}
+                    value={entrada.dateEntry}
                     onChange={handleInputChange}
                     required
                 />
@@ -141,7 +141,7 @@ const Entradas = () => {
                 <tbody>
                     {entradas.map((entrada) => (
                         <tr key={entrada.id}>
-                            <td>{entrada.dateEntry}</td>
+                            <td>{formatDate(entrada.dateEntry)}</td>
                             <td>{getProductName(entrada.productId)}</td>
                             <td>{entrada.quantity}</td>
                         </tr>

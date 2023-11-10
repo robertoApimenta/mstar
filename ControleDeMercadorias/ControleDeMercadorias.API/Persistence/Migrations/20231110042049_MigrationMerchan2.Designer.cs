@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ControleDeMercadorias.API.Persistence.Migrations
 {
     [DbContext(typeof(MerchandiseControlDbContext))]
-    [Migration("20231108054548_MigrationMerchan")]
-    partial class MigrationMerchan
+    [Migration("20231110042049_MigrationMerchan2")]
+    partial class MigrationMerchan2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,7 @@ namespace ControleDeMercadorias.API.Persistence.Migrations
                         .HasColumnName("description");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("is_required");
 
                     b.Property<string>("Manufacturer")
