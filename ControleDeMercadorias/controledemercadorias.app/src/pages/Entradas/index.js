@@ -124,7 +124,7 @@ const Entradas = () => {
                     name="quantity"
                     value={entrada.quantity}
                     onChange={handleInputChange}
-                    min="0"
+                    min="1"
                     required
                 />
                 <Button type="submit">Registrar Entrada</Button>

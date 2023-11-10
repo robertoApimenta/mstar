@@ -41,6 +41,13 @@ const Saidas = () => {
                     quantity: 0,
                 });
             } else {
+                await axios.put(`http://localhost:5198/api/products/${saida.productId}`, {
+                    name: produto.data.name,
+                    manufacturer: produto.data.manufacturer,
+                    type: produto.data.type,
+                    description: produto.data.description,
+                    quantityinstock: (Number(produto.data.quantityInStock) - Number(saida.quantity))
+                });
                 await axios.post('http://localhost:5198/api/product-output', saida);
                 setSaida({
                     productId: '',
@@ -122,7 +129,7 @@ const Saidas = () => {
                     name="quantity"
                     value={saida.quantity}
                     onChange={handleInputChange}
-                    min="0"
+                    min="1"
                     required
                 />
                 <Button type="submit">Registrar Entrada</Button>
