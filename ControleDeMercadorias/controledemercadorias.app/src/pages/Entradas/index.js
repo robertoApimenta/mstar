@@ -85,6 +85,14 @@ const Entradas = () => {
         return produto ? produto.name : 'Produto não encontrado';
     };
 
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
+
     return (
         <Container>
             <h4>CADASTRAR NOVA ENTRADA</h4>
@@ -107,7 +115,7 @@ const Entradas = () => {
                 <Input
                     type="date"
                     name="dateEntry"
-                    value={entrada.dateEntry}
+                    value={formatDate(entrada.dateEntry)}
                     onChange={handleInputChange}
                     required
                 />

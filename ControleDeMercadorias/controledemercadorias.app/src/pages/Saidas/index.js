@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Container, Table } from './styles';
+import Input from '../../components/Input';
+import Select from '../../components/Select';
+import Button from '../../components/Button';
+
+import { Container, Table, Form } from './styles';
 
 const Saidas = () => {
 
@@ -50,7 +54,7 @@ const Saidas = () => {
     };
 
     useEffect(() => {
-        const fetchEntradas = async () => {
+        const fetchSaidas = async () => {
             try {
                 const response = await axios.get('http://localhost:5198/api/product-output');
                 setSaidas(response.data);
@@ -59,7 +63,7 @@ const Saidas = () => {
             }
         };
 
-        fetchEntradas();
+        fetchSaidas();
     }, [saida]);
 
     useEffect(() => {
@@ -80,12 +84,20 @@ const Saidas = () => {
         return produto ? produto.name : 'Produto não encontrado';
     };
 
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
+
     return (
         <Container>
-            Saídas
+            <h4>CADASTRAR NOVA SAÍDA</h4>
 
-            <form onSubmit={handleSubmit}>
-                <select
+            <Form onSubmit={handleSubmit}>
+                <Select
                     name="productId"
                     value={saida.productId}
                     onChange={handleInputChange}
@@ -97,15 +109,15 @@ const Saidas = () => {
                             {produto.name}
                         </option>
                     ))}
-                </select>
-                <input
+                </Select>
+                <Input
                     type="date"
                     name="dateOutput"
                     value={saida.dateOutput}
                     onChange={handleInputChange}
                     required
                 />
-                <input
+                <Input
                     type="number"
                     name="quantity"
                     value={saida.quantity}
@@ -113,9 +125,10 @@ const Saidas = () => {
                     min="0"
                     required
                 />
-                <button type="submit">Registrar Entrada</button>
-            </form>
+                <Button type="submit">Registrar Entrada</Button>
+            </Form>
 
+            <h4>SAÍDAS</h4>
             <Table>
                 <thead>
                     <tr>
@@ -127,7 +140,7 @@ const Saidas = () => {
                 <tbody>
                     {saidas.map((entrada) => (
                         <tr key={entrada.id}>
-                            <td>{entrada.dateOutput}</td>
+                            <td>{formatDate(entrada.dateOutput)}</td>
                             <td>{getProductName(entrada.productId)}</td>
                             <td>{entrada.quantity}</td>
                         </tr>

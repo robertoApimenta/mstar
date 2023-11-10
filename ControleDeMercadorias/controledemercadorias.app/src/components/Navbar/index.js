@@ -18,6 +18,9 @@ const Navbar = () => {
                 <StyledListItem>
                     <StyledLink to="/saidas">Saidas</StyledLink>
                 </StyledListItem>
+                <StyledListItem>
+                    <StyledLink to="/relatorios">Relatórios</StyledLink>
+                </StyledListItem>
             </StyledList>
         </Container>
     );
